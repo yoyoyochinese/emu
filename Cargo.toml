@@ -9,3 +9,6 @@ channel = "1.95"
 [dependencies]
 anyhow = "1.0"
 dirs = "5.0"
+dialoguer = "0.12"
+console = "0.16"
+indicatif = "0.18"
