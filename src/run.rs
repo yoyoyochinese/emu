@@ -120,16 +120,16 @@ fn find_apk(project_root: &Path, manual: Option<&Path>) -> Result<PathBuf> {
         bail!("Specified APK not found: {}", path.display());
     }
 
-    // Search build/outputs/apk/ recursively for .apk files
-    let apk_dir = project_root.join("build").join("outputs").join("apk");
+    // Search for .apk files under all build/outputs/apk/ directories
+    // (handles both single-module and multi-module project layouts)
     let mut apks: Vec<PathBuf> = Vec::new();
 
-    collect_apks(&apk_dir, &mut apks);
+    collect_apks(project_root, &mut apks);
 
     if apks.is_empty() {
         bail!(
             "No APK found under {}. Run `gradlew installDebug` first.",
-            apk_dir.display()
+            project_root.display()
         );
     }
 
