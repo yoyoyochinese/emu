@@ -43,27 +43,26 @@ fn fallback_sdk_locations() -> Vec<PathBuf> {
     let home_dir = dirs::home_dir();
 
     cfg_select! {
-            target_os = "windows" => {
-
+        target_os = "windows" => {
             if let Some(h) = home_dir {
                 candidates.push(h.join("AppData").join("Local").join("Android").join("Sdk"));
             }
             candidates.push(PathBuf::from(r"C:\Program Files (x86)\Android\android-sdk"));
             candidates.push(PathBuf::from(r"C:\Program Files\Android\android-sdk"));
             candidates.push(PathBuf::from(r"C:\Android\android-sdk"));
-            }
+        }
 
-            target_os = "macos" => {
-                if let Some(h) = home_dir {
-                    candidates.push(h.join("Library").join("Android").join("sdk"));
-                }
+        target_os = "macos" => {
+            if let Some(h) = home_dir {
+                candidates.push(h.join("Library").join("Android").join("sdk"));
             }
+        }
 
-            target_os = "linux" => {
-                if let Some(h) = home_dir {
-                    candidates.push(h.join("Android").join("Sdk"));
-                }
+        target_os = "linux" => {
+            if let Some(h) = home_dir {
+                candidates.push(h.join("Android").join("Sdk"));
             }
+        }
     }
 
     return candidates;
