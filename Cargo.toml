@@ -12,3 +12,16 @@ dirs = "5.0"
 dialoguer = "0.12"
 console = "0.16"
 indicatif = "0.18"
+clap = { version = "4.6.1", features = ["derive"] }
+ctrlc = "3.5.2"
+
+[target."cfg(unix)".dependencies]
+libc = "0.2.186"
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
+
+[dev-dependencies]
+tempfile = "3.27.0"
